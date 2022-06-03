@@ -1,0 +1,36 @@
+; ModuleID = '666 compiling principal PYF YHR'
+source_filename = "666 compiling principal PYF YHR"
+
+define i16 @gcd(i16 %u, i16 %v) {
+entry:
+  %v2 = alloca i16, align 2
+  %u1 = alloca i16, align 2
+  store i16 %u, i16* %u1, align 2
+  store i16 %v, i16* %v2, align 2
+  %v3 = load i16, i16* %v2, align 2
+  %eqtmp = icmp eq i16 %v3, 0
+  %ifcond = icmp ne i1 %eqtmp, false
+  br i1 %ifcond, label %then, label %else
+
+then:                                             ; preds = %entry
+  %u4 = load i16, i16* %u1, align 2
+  ret i16 %u4
+  br label %ifcont
+
+else:                                             ; preds = %entry
+  %v5 = load i16, i16* %v2, align 2
+  %u6 = load i16, i16* %u1, align 2
+  %u7 = load i16, i16* %u1, align 2
+  %v8 = load i16, i16* %v2, align 2
+  %multmp = sdiv i16 %u7, %v8
+  %v9 = load i16, i16* %v2, align 2
+  %multmp10 = mul i16 %multmp, %v9
+  %subtmp = sub i16 %u6, %multmp10
+  %calltmp = call i16 @gcd(i16 %v5, i16 %subtmp)
+  ret i16 %calltmp
+  br label %ifcont
+
+ifcont:                                           ; preds = %else, %then
+  ret i16 0
+}
+

@@ -1,0 +1,46 @@
+; ModuleID = 'my cool jit'
+source_filename = "my cool jit"
+
+declare i16 @printi(i16)
+
+define i16 @f(i16 %n) {
+entry:
+  %i = alloca i16, align 2
+  %sum = alloca i16, align 2
+  store i16 0, i16* %sum, align 2
+  store i16 0, i16* %i, align 2
+  store i16 0, i16* %sum, align 2
+  store i16 %n, i16* %i, align 2
+  %gttmp = icmp sgt i16 %n, 0
+  br i1 %gttmp, label %then, label %ifcont18
+
+then:                                             ; preds = %ifcont, %entry
+  %i4 = load i16, i16* %i, align 2
+  %0 = and i16 %i4, 1
+  %eqtmp = icmp eq i16 %0, 0
+  br i1 %eqtmp, label %then8, label %else
+
+then8:                                            ; preds = %then
+  %sum9 = load i16, i16* %sum, align 2
+  %i10 = load i16, i16* %i, align 2
+  %addtmp = add i16 %i10, %sum9
+  store i16 %addtmp, i16* %sum, align 2
+  br label %ifcont
+
+else:                                             ; preds = %then
+  %i13 = load i16, i16* %i, align 2
+  br label %ifcont
+
+ifcont:                                           ; preds = %else, %then8
+  %storemerge.in = phi i16 [ %i13, %else ], [ %i10, %then8 ]
+  %storemerge = add i16 %storemerge.in, -1
+  store i16 %storemerge, i16* %i, align 2
+  %gttmp16 = icmp sgt i16 %storemerge, 0
+  br i1 %gttmp16, label %then, label %ifcont18
+
+ifcont18:                                         ; preds = %ifcont, %entry
+  %sum19 = load i16, i16* %sum, align 2
+  ret i16 %sum19
+  ret i16 0
+}
+

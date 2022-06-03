@@ -1,0 +1,11 @@
+int f(int n){
+int sum;
+int i;
+sum = 0;
+i=n;
+  while(i>0){
+   sum = sum + i;
+   i = i - 1;	
+}
+return sum;
+}

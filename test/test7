@@ -1,0 +1,15 @@
+int g(int n){
+int sum;
+int i;
+sum = 0;
+i=n;
+  while(i>0){
+   sum = sum + i;
+   i = i - 1;	
+}
+return sum;
+}
+
+int f(int n){
+return 2*g(n);
+}

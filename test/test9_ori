@@ -1,0 +1,93 @@
+; ModuleID = '666 compiling principal PYF YHR'
+source_filename = "666 compiling principal PYF YHR"
+
+define i16 @fib(i16 %x) {
+entry:
+  %x1 = alloca i16, align 2
+  store i16 %x, i16* %x1, align 2
+  %x2 = load i16, i16* %x1, align 2
+  %lttmp = icmp slt i16 %x2, 3
+  %ifcond = icmp ne i1 %lttmp, false
+  br i1 %ifcond, label %then, label %else
+
+then:                                             ; preds = %entry
+  ret i16 1
+  br label %ifcont
+
+else:                                             ; preds = %entry
+  %x3 = load i16, i16* %x1, align 2
+  %subtmp = sub i16 %x3, 1
+  %calltmp = call i16 @fib(i16 %subtmp)
+  %x4 = load i16, i16* %x1, align 2
+  %subtmp5 = sub i16 %x4, 2
+  %calltmp6 = call i16 @fib(i16 %subtmp5)
+  %addtmp = add i16 %calltmp, %calltmp6
+  ret i16 %addtmp
+  br label %ifcont
+
+ifcont:                                           ; preds = %else, %then
+  ret i16 0
+}
+
+define i16 @f(i16 %n) {
+entry:
+  %i = alloca i16, align 2
+  %sum = alloca i16, align 2
+  %n1 = alloca i16, align 2
+  store i16 %n, i16* %n1, align 2
+  store i16 0, i16* %sum, align 2
+  store i16 0, i16* %i, align 2
+  store i16 0, i16* %sum, align 2
+  %n2 = load i16, i16* %n1, align 2
+  store i16 %n2, i16* %i, align 2
+  %i3 = load i16, i16* %i, align 2
+  %gttmp = icmp sgt i16 %i3, 0
+  %ifcond = icmp ne i1 %gttmp, false
+  br i1 %ifcond, label %then, label %ifcont
+
+then:                                             ; preds = %then, %entry
+  %sum4 = load i16, i16* %sum, align 2
+  %i5 = load i16, i16* %i, align 2
+  %addtmp = add i16 %sum4, %i5
+  store i16 %addtmp, i16* %sum, align 2
+  %i6 = load i16, i16* %i, align 2
+  %subtmp = sub i16 %i6, 1
+  store i16 %subtmp, i16* %i, align 2
+  %i7 = load i16, i16* %i, align 2
+  %gttmp8 = icmp sgt i16 %i7, 0
+  %ifcond9 = icmp ne i1 %gttmp8, false
+  br i1 %ifcond9, label %then, label %ifcont
+
+ifcont:                                           ; preds = %then, %entry
+  %sum10 = load i16, i16* %sum, align 2
+  ret i16 %sum10
+  ret i16 0
+}
+
+define i16 @g(i16 %x, i16 %flag) {
+entry:
+  %flag2 = alloca i16, align 2
+  %x1 = alloca i16, align 2
+  store i16 %x, i16* %x1, align 2
+  store i16 %flag, i16* %flag2, align 2
+  %flag3 = load i16, i16* %flag2, align 2
+  %eqtmp = icmp eq i16 %flag3, 0
+  %ifcond = icmp ne i1 %eqtmp, false
+  br i1 %ifcond, label %then, label %else
+
+then:                                             ; preds = %entry
+  %x4 = load i16, i16* %x1, align 2
+  %calltmp = call i16 @fib(i16 %x4)
+  ret i16 %calltmp
+  br label %ifcont
+
+else:                                             ; preds = %entry
+  %x5 = load i16, i16* %x1, align 2
+  %calltmp6 = call i16 @f(i16 %x5)
+  ret i16 %calltmp6
+  br label %ifcont
+
+ifcont:                                           ; preds = %else, %then
+  ret i16 0
+}
+

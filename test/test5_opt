@@ -1,0 +1,32 @@
+; ModuleID = 'my cool jit'
+source_filename = "my cool jit"
+
+declare i16 @printi(i16)
+
+define i16 @f(i16 %n) {
+entry:
+  %i = alloca i16, align 2
+  %sum = alloca i16, align 2
+  store i16 0, i16* %sum, align 2
+  store i16 0, i16* %i, align 2
+  store i16 0, i16* %sum, align 2
+  store i16 %n, i16* %i, align 2
+  %gttmp = icmp sgt i16 %n, 0
+  br i1 %gttmp, label %then, label %ifcont
+
+then:                                             ; preds = %then, %entry
+  %sum4 = load i16, i16* %sum, align 2
+  %i5 = load i16, i16* %i, align 2
+  %addtmp = add i16 %i5, %sum4
+  store i16 %addtmp, i16* %sum, align 2
+  %subtmp = add i16 %i5, -1
+  store i16 %subtmp, i16* %i, align 2
+  %gttmp8 = icmp sgt i16 %subtmp, 0
+  br i1 %gttmp8, label %then, label %ifcont
+
+ifcont:                                           ; preds = %then, %entry
+  %sum10 = load i16, i16* %sum, align 2
+  ret i16 %sum10
+  ret i16 0
+}
+

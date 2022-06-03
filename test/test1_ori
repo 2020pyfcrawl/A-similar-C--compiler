@@ -1,0 +1,17 @@
+; ModuleID = '666 compiling principal PYF YHR'
+source_filename = "666 compiling principal PYF YHR"
+
+@a = global i16 0, align 2
+
+define i16 @f(i16 %n) {
+entry:
+  %n1 = alloca i16, align 2
+  store i16 %n, i16* %n1, align 2
+  %n2 = load i16, i16* %n1, align 2
+  store i16 %n2, i16* @a, align 2
+  %a = load i16, i16* @a, align 2
+  %addtmp = add i16 %a, 1
+  ret i16 %addtmp
+  ret i16 0
+}
+

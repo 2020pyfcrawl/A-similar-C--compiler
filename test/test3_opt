@@ -1,0 +1,18 @@
+; ModuleID = 'my cool jit'
+source_filename = "my cool jit"
+
+@"a[0]" = global i16 0, align 2
+@"a[1]" = global i16 0, align 2
+@"a[2]" = global i16 0, align 2
+
+declare i16 @printi(i16)
+
+define i16 @f(i16 %n) {
+entry:
+  store i16 1, i16* @"a[0]", align 2
+  store i16 10, i16* @"a[1]", align 2
+  store i16 100, i16* @"a[2]", align 2
+  ret i16 100
+  ret i16 0
+}
+

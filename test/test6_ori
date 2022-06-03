@@ -1,0 +1,57 @@
+; ModuleID = '666 compiling principal PYF YHR'
+source_filename = "666 compiling principal PYF YHR"
+
+define i16 @f(i16 %n) {
+entry:
+  %i = alloca i16, align 2
+  %sum = alloca i16, align 2
+  %n1 = alloca i16, align 2
+  store i16 %n, i16* %n1, align 2
+  store i16 0, i16* %sum, align 2
+  store i16 0, i16* %i, align 2
+  store i16 0, i16* %sum, align 2
+  %n2 = load i16, i16* %n1, align 2
+  store i16 %n2, i16* %i, align 2
+  %i3 = load i16, i16* %i, align 2
+  %gttmp = icmp sgt i16 %i3, 0
+  %ifcond = icmp ne i1 %gttmp, false
+  br i1 %ifcond, label %then, label %ifcont18
+
+then:                                             ; preds = %ifcont, %entry
+  %i4 = load i16, i16* %i, align 2
+  %i5 = load i16, i16* %i, align 2
+  %multmp = sdiv i16 %i5, 2
+  %multmp6 = mul i16 %multmp, 2
+  %subtmp = sub i16 %i4, %multmp6
+  %eqtmp = icmp eq i16 %subtmp, 0
+  %ifcond7 = icmp ne i1 %eqtmp, false
+  br i1 %ifcond7, label %then8, label %else
+
+then8:                                            ; preds = %then
+  %sum9 = load i16, i16* %sum, align 2
+  %i10 = load i16, i16* %i, align 2
+  %addtmp = add i16 %sum9, %i10
+  store i16 %addtmp, i16* %sum, align 2
+  %i11 = load i16, i16* %i, align 2
+  %subtmp12 = sub i16 %i11, 1
+  store i16 %subtmp12, i16* %i, align 2
+  br label %ifcont
+
+else:                                             ; preds = %then
+  %i13 = load i16, i16* %i, align 2
+  %subtmp14 = sub i16 %i13, 1
+  store i16 %subtmp14, i16* %i, align 2
+  br label %ifcont
+
+ifcont:                                           ; preds = %else, %then8
+  %i15 = load i16, i16* %i, align 2
+  %gttmp16 = icmp sgt i16 %i15, 0
+  %ifcond17 = icmp ne i1 %gttmp16, false
+  br i1 %ifcond17, label %then, label %ifcont18
+
+ifcont18:                                         ; preds = %ifcont, %entry
+  %sum19 = load i16, i16* %sum, align 2
+  ret i16 %sum19
+  ret i16 0
+}
+

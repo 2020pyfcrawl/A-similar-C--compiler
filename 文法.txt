@@ -1,0 +1,89 @@
+program → declaration-list
+
+declaration-list →  declaration declaration-list | declaration
+
+declaration → var-declaration|fun-declaration
+    need a class for var declaration   --- VariableExprAST ArrayExprAST 
+    need a class for fun-declaration   --- FunctionAST {PrototypeAST}
+
+var-declaration → type-specifier ID | type-specifier ID[NUM];
+    --- VariableExprAST     Name | Value                1
+    --- ArrayExprAST        Name | Size | Value         2
+            Arrays can be considered as arrays of VariableExprAST
+
+type-specifier → int|void
+
+fun-declaration → type-specifier ID(params) compound-stmt
+    --- FunctionAST {PrototypeAST}                      3{4}
+            params are composed of two strings (type | Name)
+    need a class for compound-stmt  --- cpdstmtExpr?
+    
+
+params → params-list|void
+
+param-list → parm param-list | param
+
+param → type-specifier ID
+
+compound-stmt → {local-declarations statements}
+    --- cpdstmtExpr                                     5
+    local-declaration used var-declaration 
+        ---this will be discussed later as access link and other way of storing values
+    **statement-list may be done by vectors of statements
+
+local-declarations → var-declaration local-declarations | empty
+
+statement-list → statement | {statements}
+
+statement → expression-stmt|compound-stmt|selection-stmt|iteration-stmt|return-stmt
+    
+statements → statement+
+    each type of statement is a class
+    all drives from abstract class statement
+    ExprAST
+        BinaryExprAST
+        cpdstmtExpr ? may directly changed to no-declaration in the blocks
+                        only permit in the function at one time
+            //ACCESS-LINK may be achieved by vectoring blocks with each modules
+            //and delete them when done (each module together with a namerecord(contains value?))
+        IfExprAST                                   8
+        WhileExprAST                                9
+        ReturnExprAST                               10
+
+
+expression-stmt → expression; | ;
+    BinaryExprAST                                   6
+
+selection-stmt → if(expression) statement-list | if(expression) statement-list else statement-list
+    IfExprAST
+
+iteration-stmt → while(expression) statement-list
+    WhileExprAST
+
+return-stmt → return ;| return expression;
+    ReturnExprAST
+
+expression → var=expression|simple-expression
+    assign needs a class to do --- AssignExprAST      7
+
+var → ID|ID[NUM]
+
+simple-expression → additive-expression | additive-expression relop additive-expression
+    BinaryExprAST can do all of this
+
+relop → <=|<|>|>=|==|!=
+additive-expression → term | term addop term
+addop → +|-
+term → factor | factor mulop factor
+mulop → *|/
+factor → (expression)|var|call|NUM
+
+call → ID(args)
+    CallExprAST --- need type checks                    11
+
+args → arg-list|empty
+
+
+arg-list → expression,arg-list | expression
+
+

@@ -1,0 +1,31 @@
+; ModuleID = 'my cool jit'
+source_filename = "my cool jit"
+
+declare i16 @printi(i16)
+
+define i16 @gcd(i16 %u, i16 %v) {
+entry:
+  %v2 = alloca i16, align 2
+  %u1 = alloca i16, align 2
+  store i16 %u, i16* %u1, align 2
+  store i16 %v, i16* %v2, align 2
+  %eqtmp = icmp eq i16 %v, 0
+  br i1 %eqtmp, label %then, label %else
+
+then:                                             ; preds = %entry
+  %u4 = load i16, i16* %u1, align 2
+  ret i16 %u4
+  br label %ifcont
+
+else:                                             ; preds = %entry
+  %v5 = load i16, i16* %v2, align 2
+  %u6 = load i16, i16* %u1, align 2
+  %0 = srem i16 %u6, %v5
+  %calltmp = call i16 @gcd(i16 %v5, i16 %0)
+  ret i16 %calltmp
+  br label %ifcont
+
+ifcont:                                           ; preds = %else, %then
+  ret i16 0
+}
+

@@ -1,0 +1,15 @@
+int f(int n){
+int sum;
+int i;
+sum = 0;
+i=n;
+  while(i>0){
+   if(i-i/2*2==0){
+   sum = sum + i;
+   i = i - 1;	
+}
+else i = i-1;
+
+}
+return sum;
+}

@@ -1,0 +1,79 @@
+; ModuleID = 'my cool jit'
+source_filename = "my cool jit"
+
+declare i16 @printi(i16)
+
+define i16 @fib(i16 %x) {
+entry:
+  %x1 = alloca i16, align 2
+  store i16 %x, i16* %x1, align 2
+  %lttmp = icmp slt i16 %x, 3
+  br i1 %lttmp, label %then, label %else
+
+then:                                             ; preds = %entry
+  ret i16 1
+  br label %ifcont
+
+else:                                             ; preds = %entry
+  %x3 = load i16, i16* %x1, align 2
+  %subtmp = add i16 %x3, -1
+  %calltmp = call i16 @fib(i16 %subtmp)
+  %subtmp5 = add i16 %x3, -2
+  %calltmp6 = call i16 @fib(i16 %subtmp5)
+  %addtmp = add i16 %calltmp6, %calltmp
+  ret i16 %addtmp
+  br label %ifcont
+
+ifcont:                                           ; preds = %else, %then
+  ret i16 0
+}
+
+define i16 @f(i16 %n) {
+entry:
+  %i = alloca i16, align 2
+  %sum = alloca i16, align 2
+  store i16 0, i16* %sum, align 2
+  store i16 0, i16* %i, align 2
+  store i16 0, i16* %sum, align 2
+  store i16 %n, i16* %i, align 2
+  %gttmp = icmp sgt i16 %n, 0
+  br i1 %gttmp, label %then, label %ifcont
+
+then:                                             ; preds = %then, %entry
+  %sum4 = load i16, i16* %sum, align 2
+  %i5 = load i16, i16* %i, align 2
+  %addtmp = add i16 %i5, %sum4
+  store i16 %addtmp, i16* %sum, align 2
+  %subtmp = add i16 %i5, -1
+  store i16 %subtmp, i16* %i, align 2
+  %gttmp8 = icmp sgt i16 %subtmp, 0
+  br i1 %gttmp8, label %then, label %ifcont
+
+ifcont:                                           ; preds = %then, %entry
+  %sum10 = load i16, i16* %sum, align 2
+  ret i16 %sum10
+  ret i16 0
+}
+
+define i16 @g(i16 %x, i16 %flag) {
+entry:
+  %x1 = alloca i16, align 2
+  store i16 %x, i16* %x1, align 2
+  %eqtmp = icmp eq i16 %flag, 0
+  br i1 %eqtmp, label %then, label %else
+
+then:                                             ; preds = %entry
+  %x4 = load i16, i16* %x1, align 2
+  %calltmp = call i16 @fib(i16 %x4)
+  ret i16 %calltmp
+  br label %ifcont
+
+else:                                             ; preds = %entry
+  %x5 = load i16, i16* %x1, align 2
+  %calltmp6 = call i16 @f(i16 %x5)
+  ret i16 %calltmp6
+  br label %ifcont
+
+ifcont:                                           ; preds = %else, %then
+  ret i16 0
+}

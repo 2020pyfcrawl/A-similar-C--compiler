@@ -1,0 +1,63 @@
+int fib(int x){
+    if(x < 3){
+        return 1;
+    }
+    else{
+        return fib(x-1) + fib(x-2);
+    }
+}
+
+/*int a[10];
+int b;*/
+/*int f(int x){
+    x = 5;
+    if(x>4){
+        x = 1;
+    }
+
+   return x+1;
+}*/
+int gcd (int u,int v)
+{
+if (v == 0){
+  return u ;
+}
+ 
+else
+ return gcd(v,u-u/v*v);
+
+}
+/*int ss(int x){
+    while(x > 1){
+        x = x-1;
+    }
+    return x;
+}*/
+/*
+int main(void){
+    return ss(5);
+}*/
+
+/*int qiuhe(int n){
+  if(n > 5){
+    if( n <= 6)
+    return n;
+    else 
+    return 10;
+  }
+  return n;
+}
+int f(int n){
+  n = 1;
+  return n;
+}*/
+/*int x;
+int a[2];
+void main(void){
+  int b[1];
+  x = 1;
+  b[0] = (x+2)*(2+x);
+  a[0] = 1 + b[0];
+  x = 1 + a[0];
+  return x;
+}*/
