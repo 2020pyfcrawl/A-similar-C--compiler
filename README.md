@@ -86,7 +86,7 @@ The whole project did not establish a new folder, convenient for readers to dire
 You can preview the code first and execute the code with Readme on a machine with LLVM installed.
 </br>
 </br>
-**DO NOT USE FOR ATTACKS OR COMMERCIAL PURPOSES!**<br></b>
+DO NOT USE FOR ATTACKS OR COMMERCIAL PURPOSES!<br></b>
 Thanks!
 
 
