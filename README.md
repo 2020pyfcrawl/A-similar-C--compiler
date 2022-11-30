@@ -22,7 +22,7 @@ Project directory explainations:
   - **codegen1.cpp** : Base on **LLVM** to achieve many classes of code generation functions. The main function in this file calls functions in the process of the DFA construction, token reading, syntax tree generation, semantic analysis, conversion to syntax tree of the newly defined class, and intermediate code generation.
   - **codegen_opt.cpp** : On the basis of codegen1.cpp, supplement optimization code to optimize the module code, and part to embed C code for functions like input and output in IR.
 
-- **Makefile** : You can use Makefile to generate an executable file. There are two types of executable files, $($NAME) is not optimized and $($NAME1) with embedded C functions with 5 optional optimizations (depending on LLVM's design for each optimization pass, the optimizations can be any combination). You can specify the name of the build file by editing the value of $($NAME) or $($NAME1). Do not run the make command in multiple threads at the same time. (Please refer to Makefile.)
+- **Makefile** : You can use Makefile to generate an executable file. There are two types of executable files, (NAME) is not optimized and (NAME1) with embedded C functions with 5 optional optimizations (depending on LLVM's design for each optimization pass, the optimizations can be any combination). You can specify the name of the build file by editing the value of (NAME) or (NAME1). Do not run the make command in multiple threads at the same time. (Please refer to Makefile.)
 
 - **input** : "input" is the input file of the default custom syntax (that is, the result of a CFG grammar derivation). The program reads the file and checks for errors. If there are no errors, the intermediate code is generated.
 
