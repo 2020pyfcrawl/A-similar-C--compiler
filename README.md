@@ -1,4 +1,7 @@
-## 整个工程文件说明
+## Entire project documentation and structure description
+
+This project are using **LLVM**, if you know about it, it will be easy for you to understand.<br> 
+
 
 Project directory explainations:
 
