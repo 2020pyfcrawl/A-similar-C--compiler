@@ -78,11 +78,13 @@ The whole project did not establish a new folder, convenient for readers to dire
 <br>
 <br>
 
-<p align=right> -- Yifei Pang
+<p align=right> -- Yifei Pang</p>
 
 <br>
-Now the report is not translated into English version, so still in Chinese.<br>
-You can preview the code first and execute the code with Readme on a machine with LLVM installed.<br>
+**Now the report is not translated into English version, so still in Chinese.**
+<br>
+**You can preview the code first and execute the code with Readme on a machine with LLVM installed.**
+<br>
 
 **DO NOT USE FOR ATTACKS OR COMMERCIAL PURPOSES!**<br>
 Thanks!
